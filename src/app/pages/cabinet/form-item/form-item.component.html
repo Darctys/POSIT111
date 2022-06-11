@@ -1,5 +1,7 @@
 <nz-card>
-  <button (click)="deleteField()" nz-button nzType="default" nzDanger>Удалить</button>
+  <div>
+    Поле формы
+  </div>
   <input [(ngModel)]="model.name" nz-input placeholder="Название поля" nzSize="large" />
   <nz-select
     [(ngModel)]="model.type"
@@ -45,5 +47,6 @@
   </div>
   <nz-switch [(ngModel)]="model.required"></nz-switch>
   обязательное
+  <button (click)="deleteField()" nz-button nzType="default" nzDanger>Удалить</button>
 </nz-card>
 
