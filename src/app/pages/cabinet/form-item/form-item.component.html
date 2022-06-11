@@ -1,0 +1,49 @@
+<nz-card>
+  <button (click)="deleteField()" nz-button nzType="default" nzDanger>Удалить</button>
+  <input [(ngModel)]="model.name" nz-input placeholder="Название поля" nzSize="large" />
+  <nz-select
+    [(ngModel)]="model.type"
+    nzAllowClear
+    nzPlaceHolder="Выберите тип поля"
+    [nzOptions]="fieldTypeList"
+    (ngModelChange)="cleatAdditionalData()"
+  ></nz-select>
+  <div [ngSwitch]="model.type">
+    <div *ngSwitchCase="fieldType.select">
+      <button nz-button nzType="primary" [nzSize]="'small'" (click)="addDataItem()">
+        <i nz-icon nzType="plus" nzTheme="outline"></i>
+      </button>
+      <div *ngFor="let item of additionalData; let i = index">
+        <input nz-input placeholder="Вариант" [ngModel]="item"/>
+        <button nz-button nzType="text" (click)="deleteDataItem(i)">
+          <i nz-icon nzType="close" nzTheme="outline"></i>
+        </button>
+      </div>
+    </div>
+    <div *ngSwitchCase="fieldType.multiSelect">
+      <button nz-button nzType="primary" [nzSize]="'small'" (click)="addDataItem()">
+        <i nz-icon nzType="plus" nzTheme="outline"></i>
+      </button>
+      <div *ngFor="let item of additionalData; let i = index">
+        <input nz-input placeholder="Вариант" [ngModel]="item"/>
+        <button nz-button nzType="text" (click)="deleteDataItem(i)">
+          <i nz-icon nzType="close" nzTheme="outline"></i>
+        </button>
+      </div>
+    </div>
+    <div *ngSwitchCase="fieldType.radioButtons">
+      <button nz-button nzType="primary" [nzSize]="'small'" (click)="addDataItem()">
+        <i nz-icon nzType="plus" nzTheme="outline"></i>
+      </button>
+      <div *ngFor="let item of additionalData; let i = index">
+        <input nz-input placeholder="Вариант" [ngModel]="item"/>
+        <button nz-button nzType="text" (click)="deleteDataItem(i)">
+          <i nz-icon nzType="close" nzTheme="outline"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <nz-switch [(ngModel)]="model.required"></nz-switch>
+  обязательное
+</nz-card>
+

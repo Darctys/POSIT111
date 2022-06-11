@@ -1,0 +1,7 @@
+<input [(ngModel)]="form.name" nz-input placeholder="Название формы" nzSize="large" />
+<textarea [(ngModel)]="form.description" nz-input placeholder="Описание формы" nzAutosize></textarea>
+<div *ngFor="let field of form.fields">
+  <form-item [model]="field" (deleteEvent)="deleteField($event)" ></form-item>
+</div>
+<button nz-button [nzType]="'primary'" (click)="addField()"><span>Добавить поле</span></button>
+<button nz-button [nzType]="'primary'" (click)="saveForm()"><span>Сохранить форму</span></button>
