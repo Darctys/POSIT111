@@ -20,23 +20,25 @@ import {FormItemComponent} from "../form-item/form-item.component";
 import {NzCardModule} from "ng-zorro-antd/card";
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {NzSwitchModule} from "ng-zorro-antd/switch";
+import {NzGridModule} from "ng-zorro-antd/grid";
 
 
 @NgModule({
-  imports: [
-    NzTableModule,
-    CommonModule,
-    NzInputModule,
-    NzPopconfirmModule,
-    FormsModule,
-    NzButtonModule,
-    NzModalModule,
-    StudentAddModule,
-    NzIconModule,
-    NzCardModule,
-    NzSelectModule,
-    NzSwitchModule,
-  ],
+    imports: [
+        NzTableModule,
+        CommonModule,
+        NzInputModule,
+        NzPopconfirmModule,
+        FormsModule,
+        NzButtonModule,
+        NzModalModule,
+        StudentAddModule,
+        NzIconModule,
+        NzCardModule,
+        NzSelectModule,
+        NzSwitchModule,
+        NzGridModule,
+    ],
   declarations: [
     FormsCreateComponent,
     FormItemComponent

@@ -34,6 +34,9 @@ const routes: Routes = [
           path: 'student/:id',
           component: StudentsDetailComponent,
           pathMatch: 'full',
+        },
+        {
+          path: 'answers', loadChildren: () => import('../answers/answers.module').then(m => m.AnswersModule)
         }
       ]
   },
