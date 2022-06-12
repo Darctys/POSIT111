@@ -7,6 +7,7 @@ import {FormField, TypeFields} from "../forms-list/models/form-list.model";
 @Component({
   selector: 'form-item',
   templateUrl: './form-item.component.html',
+  styleUrls: ['form-item.component.css'],
 })
 export class FormItemComponent implements OnInit {
 
