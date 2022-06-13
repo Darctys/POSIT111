@@ -21,6 +21,7 @@ import {NzCardModule} from "ng-zorro-antd/card";
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {NzSwitchModule} from "ng-zorro-antd/switch";
 import {NzGridModule} from "ng-zorro-antd/grid";
+import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import {NzGridModule} from "ng-zorro-antd/grid";
         NzSelectModule,
         NzSwitchModule,
         NzGridModule,
+        NzDatePickerModule,
     ],
   declarations: [
     FormsCreateComponent,

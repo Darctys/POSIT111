@@ -14,16 +14,22 @@ export class FormsCreateComponent implements OnInit {
 
   public form: FormModel = new FormModel()
 
+  public start!: Date;
+  public end!: Date;
+
   constructor(
     public formsService: FormsService,
     private _location: Location,
     private _route: ActivatedRoute,
   )
   {
+
     const id: number = this._route.snapshot.queryParams['id']
     if (id) {
       this.form = formsService.getForm(id);
-      console.log(id)
+      this.start = new Date(this.form.start)
+      this.end = new Date(this.form.end)
+
       console.log(formsService.formsList)
     }else{
       this.form.id = this.formsService.formsList.length + 1
@@ -52,6 +58,8 @@ export class FormsCreateComponent implements OnInit {
   // С промежуточной чтобы можно было юзать просто бэк
   public saveForm(): void{
     let flag = true;
+    this.form.end= this.end.toUTCString()
+    this.form.start= this.start.toUTCString()
     this.formsService.formsList.forEach((item:FormModel) => {
       if (item.id === this.form.id){
         flag = false

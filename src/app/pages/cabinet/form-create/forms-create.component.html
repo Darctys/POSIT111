@@ -1,5 +1,19 @@
 <input [(ngModel)]="form.name" nz-input placeholder="Название формы" nzSize="large" />
 <textarea [(ngModel)]="form.description" nz-input placeholder="Описание формы" nzAutosize></textarea>
+<div>
+  <nz-date-picker
+    [nzPlaceHolder]="'Время появления'"
+    nzShowTime
+    nzFormat="yyyy-MM-dd HH:mm:ss"
+    [(ngModel)]="start"
+  ></nz-date-picker>
+  <nz-date-picker
+    [nzPlaceHolder]="'Время исчезновения'"
+    nzShowTime
+    nzFormat="yyyy-MM-dd HH:mm:ss"
+    [(ngModel)]="end"
+  ></nz-date-picker>
+</div>
 <div *ngFor="let field of form.fields">
   <form-item [model]="field" (deleteEvent)="deleteField($event)" ></form-item>
 </div>

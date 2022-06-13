@@ -16,7 +16,7 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import {Auth} from "./pages/authorization/auth.module";
 import ru from '@angular/common/locales/ru';
 
-registerLocaleData(en);
+registerLocaleData(ru);
 
 @NgModule({
   declarations: [

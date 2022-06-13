@@ -2,7 +2,11 @@ export class FormModel {
   public name!: string;
   public description!: string;
   public id!: number;
-  public fields: FormField[] = []
+  public fields: FormField[] = [];
+  public start!: string;
+  public end!: string;
+
+
 
 }
 

@@ -11,6 +11,9 @@ import {StudentsDetailModule} from "../../student-detail/students-detail.module"
 import {FormsListModule} from "../forms-list/forms-list.module";
 import {FormsCreateModule} from "../form-create/forms-create.module";
 import {AnswersComponent} from "./answers.component";
+import {NzInputModule} from "ng-zorro-antd/input";
+import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
+import {AnswersRoutingModule} from "./answers-routing.module";
 
 @NgModule({
   imports: [
@@ -22,7 +25,10 @@ import {AnswersComponent} from "./answers.component";
     CommonModule,
     StudentsDetailModule,
     FormsListModule,
-    FormsCreateModule
+    FormsCreateModule,
+    NzInputModule,
+    NzDatePickerModule,
+    AnswersRoutingModule
   ],
   declarations: [
     AnswersComponent
