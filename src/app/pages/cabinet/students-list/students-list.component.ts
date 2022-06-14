@@ -5,7 +5,6 @@ import {StudentAddComponent} from "./student-add/student-add.component";
 import {StudentsService} from "../services/students.service";
 import {IStudentInterface} from "../interfaces/student.interface";
 import {NzTableFilterFn, NzTableFilterList, NzTableSortFn, NzTableSortOrder} from "ng-zorro-antd/table";
-import {Observable} from "rxjs";
 import {InstituteEnum} from "../enums/institute.enum";
 
 

@@ -6,6 +6,8 @@ import {OffersListComponent} from "../offers-list/offers-list.component";
 import {StudentsDetailComponent} from "../../student-detail/students-detail.component";
 import {FormsListComponent} from "../forms-list/forms-list.component";
 import {FormsCreateComponent} from "../form-create/forms-create.component";
+import {FacesPosComponent} from "../faces-pos/faces-pos.component";
+import {FacesPosDetailComponent} from "../faces-pos/faces-pos-detail/faces-pos-detail.component";
 
 const routes: Routes = [
   { path: '', component: CabinetComponent, children:
@@ -37,7 +39,16 @@ const routes: Routes = [
         },
         {
           path: 'answers', loadChildren: () => import('../answers/answers.module').then(m => m.AnswersModule)
-        }
+        },
+        {
+          path: 'faces-pos',
+          component: FacesPosComponent
+        },
+        {
+          path: 'faces-pos/:id',
+          component: FacesPosDetailComponent,
+          pathMatch: 'full'
+        },
       ]
   },
 

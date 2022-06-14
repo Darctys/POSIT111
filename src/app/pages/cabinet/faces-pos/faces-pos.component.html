@@ -1,0 +1,50 @@
+<button nz-button [nzType]="'primary'" (click)="createAddFaceModal()"><span>Добавить лицо POS</span></button>
+<nz-input-group [nzSuffix]="suffixIconSearch">
+  <input type="text" nz-input placeholder="Поиск" [(ngModel)]="searchValue"/>
+</nz-input-group>
+<nz-table #basicTable [nzData]="facesService.faceList | search: searchValue">
+  <thead>
+  <tr>
+    <th>Фотография</th>
+    <th *ngFor="let column of listOfColumns"
+        [nzSortOrder]="column.sortOrder"
+        [nzSortFn]="column.sortFn"
+        [nzSortDirections]="column.sortDirections"
+        [nzFilterMultiple]="column.filterMultiple"
+        [nzFilters]="column.listOfFilter"
+        [nzFilterFn]="column.filterFn"
+    >
+      {{column.name}}
+    </th>
+    <th>Контакты</th>
+    <th>Действие</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of basicTable.data">
+    <ng-container [ngSwitch]="data.institute">
+      <td>{{data.photo}}</td>
+      <td>{{ data.fullName }}</td>
+      <td *ngSwitchCase="instituteEnum.Rtf">ИРИТ-РТФ</td>
+      <td *ngSwitchCase="instituteEnum.Inmt">ИНМТ</td>
+      <td *ngSwitchCase="instituteEnum.Info">ИНФО</td>
+      <td *ngSwitchDefault>{{data.institute}}</td>
+      <td>
+        {{data.phone}}<br>
+        {{data.email}}<br>
+        vk: {{data.vkLink}}<br>
+        tg: {{data.tgLink}}
+      </td>
+      <td>
+        <button nz-button nzType="default" (click)="navigateToFacePosDetail(data.faceId)"><span>Подробнее</span></button>
+        <br>
+        <button nz-button nzType="default" nzDanger (click)="deleteStudent(data.faceId)"><span>Удалить</span></button>
+      </td>
+    </ng-container>
+  </tr>
+  </tbody>
+</nz-table>
+
+<ng-template #suffixIconSearch>
+  <i nz-icon nzType="search"></i>
+</ng-template>
