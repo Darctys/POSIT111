@@ -23,7 +23,12 @@
   <tbody>
   <tr *ngFor="let data of basicTable.data">
     <ng-container [ngSwitch]="data.institute">
-      <td>{{data.photo}}</td>
+      <td>
+        <nz-image [nzSrc]="data.photo" [nzHeight]="128" [nzWidth]="128">
+
+        </nz-image>
+
+      </td>
       <td>{{ data.fullName }}</td>
       <td *ngSwitchCase="instituteEnum.Rtf">ИРИТ-РТФ</td>
       <td *ngSwitchCase="instituteEnum.Inmt">ИНМТ</td>
@@ -36,9 +41,11 @@
         tg: {{data.tgLink}}
       </td>
       <td>
-        <button nz-button nzType="default" (click)="navigateToFacePosDetail(data.faceId)"><span>Подробнее</span></button>
+<!--        <button nz-button nzType="default" (click)="navigateToFacePosDetail(data.id)"><span>Подробнее</span></button>-->
         <br>
-        <button nz-button nzType="default" nzDanger (click)="deleteStudent(data.faceId)"><span>Удалить</span></button>
+        <button nz-button nzType="default" nzDanger (click)="deleteStudent(data.id)"><span>Удалить</span></button>
+        <br>
+        <button nz-button [nzType]="'primary'" (click)="createEditFaceModal(data.id)"><span>Изменить данные лица POS</span></button>
       </td>
     </ng-container>
   </tr>

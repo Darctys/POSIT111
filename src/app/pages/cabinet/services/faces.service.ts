@@ -11,50 +11,54 @@ export class FacesService {
   public formsLst: FormModel[] = [];
 
   constructor() {
-    this.initFaces();
-    this._initFilterList();
+    // this.initFaces();
+    // this._initFilterList();
   }
-  public initFaces(): void{
-    this.faceList = [
-      {
-        faceId: '12345678',
-        fullName: 'Петров Петр Петрович',
-        birthday: new Date(2003, 2, 1),
-        institute: InstituteEnum.Inmt,
-        photo: 'photo',
-        description: 'Это Петр',
-        vkLink: 'http://vk.com/angelinashkatova',
-        tgLink: '@angelina_shkatova',
-        email: 'petrov@nau.ru',
-        phone: '+7-800-555-35-35'
-      },
-      {
-        faceId: '12345679',
-        fullName: 'Иванов Иван Иванович',
-        birthday: new Date(2004, 3, 2),
-        institute: InstituteEnum.Rtf,
-        photo: 'photoIvan',
-        description: 'Это Иван',
-        vkLink: 'http://vk.com/angelinashkatova',
-        tgLink: '@angelina_shkatova',
-        email: 'ivanov@nau.ru',
-        phone: '+7-800-555-36-36'
-      },
-      {
-        faceId: '12345670',
-        fullName: 'Сидоров Сидр Сидорович',
-        birthday: new Date(2005, 4, 3),
-        institute: InstituteEnum.Rtf,
-        photo: 'photoSidr',
-        description: 'Это Сидр',
-        vkLink: 'http://vk.com/angelinashkatova',
-        tgLink: '@angelina_shkatova',
-        email: 'sidorov@nau.ru',
-        phone: '+7-800-555-37-37'
-      }
-    ];
-  }
-
+  // public initFaces(): void{
+  //   this.faceList = [
+  //     {
+  //       id: '12345678',
+  //       fullName: 'Петров Петр Петрович',
+  //       birthday: new Date(2003, 2, 1),
+  //       institute: InstituteEnum.Inmt,
+  //       photo: 'photo',
+  //       description: 'Это Петр',
+  //       vkLink: 'http://vk.com/angelinashkatova',
+  //       tgLink: '@angelina_shkatova',
+  //       email: 'petrov@nau.ru',
+  //       phone: '+7-800-555-35-35'
+  //     },
+  //     {
+  //       id: '12345679',
+  //       fullName: 'Иванов Иван Иванович',
+  //       birthday: new Date(2004, 3, 2),
+  //       institute: InstituteEnum.Rtf,
+  //       photo: 'photoIvan',
+  //       description: 'Это Иван',
+  //       vkLink: 'http://vk.com/angelinashkatova',
+  //       tgLink: '@angelina_shkatova',
+  //       email: 'ivanov@nau.ru',
+  //       phone: '+7-800-555-36-36'
+  //     },
+  //     {
+  //       id: '12345670',
+  //       fullName: 'Сидоров Сидр Сидорович',
+  //       birthday: new Date(2005, 4, 3),
+  //       institute: InstituteEnum.Rtf,
+  //       photo: 'photoSidr',
+  //       description: 'Это Сидр',
+  //       vkLink: 'http://vk.com/angelinashkatova',
+  //       tgLink: '@angelina_shkatova',
+  //       email: 'sidorov@nau.ru',
+  //       phone: '+7-800-555-37-37'
+  //     }
+  //   ];
+  // }
+  public filterList = [
+    {text: 'ИРИТ-РТФ', value: 0},
+    {text: 'ИНФО', value: 1},
+    {text: 'ИНМТ', value: 2}
+  ]
   private _initFilterList():void {
     const filterValues: Set<string> = new Set()
     this.faceList.forEach((face:IFaceInterface) => {
@@ -83,16 +87,16 @@ export class FacesService {
   }
 
   public deleteFace(faceId: string):void{
-    this.faceList = this.faceList.filter(item => item.faceId !== faceId);
+    this.faceList = this.faceList.filter(item => item.id !== faceId);
   }
 
   public getFace(faceId: string): IFaceInterface {
-    return this.faceList.find((x: IFaceInterface) => x.faceId === faceId)!
+    return this.faceList.find((x: IFaceInterface) => x.id === faceId)!
   }
 
   public editFace(face: IFaceInterface): void {
     this.faceList.forEach((x:IFaceInterface) => {
-      if (x.faceId===face.faceId){
+      if (x.id===face.id){
         console.log(face)
         Object.assign(x, face)
       }

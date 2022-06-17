@@ -1,5 +1,5 @@
 export interface IOfferInterface {
-  offerId: string;
+  id?: string;
   title: string;
   companyName: string;
   description: string;

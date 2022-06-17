@@ -1,16 +1,19 @@
-<button nz-button [nzType]="'primary'" (click)="createEditStudentModal()"><span>Изменить данные студента</span></button>
-<nz-descriptions nzTitle="Информация о студенте" [ngSwitch]="student.institute">
-  <nz-descriptions-item nzTitle="Имя">{{student.fullName}}</nz-descriptions-item>
-  <nz-descriptions-item nzTitle="Институт" *ngSwitchCase="instituteEnum.Rtf">ИРИТ-РТФ</nz-descriptions-item>
-  <nz-descriptions-item nzTitle="Институт" *ngSwitchCase="instituteEnum.Inmt">ИНМТ</nz-descriptions-item>
-  <nz-descriptions-item nzTitle="Институт" *ngSwitchCase="instituteEnum.Info">ИНФО</nz-descriptions-item>
-  <nz-descriptions-item *ngIf="student.isContract" nzTitle="Контракт">Да</nz-descriptions-item>
-  <nz-descriptions-item *ngIf="!student.isContract" nzTitle="Контракт">Нет</nz-descriptions-item>
-  <nz-descriptions-item nzTitle="Номер кадемической группы">{{student.academicGroup}}</nz-descriptions-item>
-  <nz-descriptions-item nzTitle="Номер студенческого билета">{{student.posIdCard}}</nz-descriptions-item>
-  <nz-descriptions-item *ngIf="student.hasElectronicSignature" nzTitle="Есть электронная подпись">Да</nz-descriptions-item>
-  <nz-descriptions-item *ngIf="!student.hasElectronicSignature" nzTitle="Есть электронная подпись">Нет</nz-descriptions-item>
-  <nz-descriptions-item nzTitle="Номер студнеческой карты">{{student.studentIdCard}}</nz-descriptions-item>
-  <nz-descriptions-item nzTitle="Почта">{{student.email}}</nz-descriptions-item>
-  <nz-descriptions-item nzTitle="Телефон">+{{student.phone}}</nz-descriptions-item>
-</nz-descriptions>
+
+<div [(ngModel)]="student">
+  <nz-descriptions nzTitle="Информация о студенте" [ngSwitch]="student.institute">
+    <nz-descriptions-item nzTitle="Имя">{{student.fullName}}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Институт" *ngSwitchCase="instituteEnum.Rtf">ИРИТ-РТФ</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Институт" *ngSwitchCase="instituteEnum.Inmt">ИНМТ</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Институт" *ngSwitchCase="instituteEnum.Info">ИНФО</nz-descriptions-item>
+    <nz-descriptions-item *ngIf="student.isContract" nzTitle="Контракт">Да</nz-descriptions-item>
+    <nz-descriptions-item *ngIf="!student.isContract" nzTitle="Контракт">Нет</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Номер кадемической группы">{{student.academicGroup}}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Номер студенческого билета">{{student.posIdCard}}</nz-descriptions-item>
+    <nz-descriptions-item *ngIf="student.hasElectronicSignature" nzTitle="Есть электронная подпись">Да</nz-descriptions-item>
+    <nz-descriptions-item *ngIf="!student.hasElectronicSignature" nzTitle="Есть электронная подпись">Нет</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Номер студнеческой карты">{{student.studentIdCard}}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Почта">{{student.email}}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Телефон">+{{student.phone}}</nz-descriptions-item>
+  </nz-descriptions>
+</div>
+

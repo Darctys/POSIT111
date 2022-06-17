@@ -3,6 +3,8 @@ import {NzModalRef} from "ng-zorro-antd/modal";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {OffersService} from "../../services/offers.service";
 import {IOfferInterface} from "../../interfaces/offer.interface";
+import {switchMap, tap} from "rxjs";
+import {RequestService} from "../../services/request.service";
 
 
 @Component({
@@ -18,6 +20,7 @@ export class OffersAddComponent implements OnInit{
     private _modal: NzModalRef,
     private _fb: FormBuilder,
     private _offersService: OffersService,
+    private _requestService: RequestService,
   ) {}
 
   ngOnInit(): void {
@@ -41,9 +44,17 @@ export class OffersAddComponent implements OnInit{
 
       return
     }
-    this._offersService.addOffer(this.toModel())
-    this._modal.destroy();
+    this._requestService.saveOffersById(this.toModel()).pipe(
+      switchMap((value: any) => {
+        this._offersService.addOffer(value)
+        return this._requestService.getAllOffers()
+      }),
+      tap(() =>
+        this._modal.destroy()
+      )
+    ).subscribe()
   }
+
   public cancel(): void {
     this._modal.destroy();
   }
@@ -55,7 +66,6 @@ export class OffersAddComponent implements OnInit{
       activity: this.validateForm.value.activity,
       deliveryWay: this.validateForm.value.deliveryWay,
       description: this.validateForm.value.description,
-      offerId: (this._offersService.offerList.length + 1).toString(),
     }
   }
 }

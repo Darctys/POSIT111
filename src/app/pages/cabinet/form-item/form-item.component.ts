@@ -20,7 +20,7 @@ export class FormItemComponent implements OnInit {
     { label: 'Множетсвенный выбор', value: TypeFields.multiSelect },
     { label: 'Радио', value: TypeFields.radioButtons },
     { label: 'Текстовый блок', value: TypeFields.textArea },
-    { label: 'Аккордеон', value: TypeFields.select },
+    { label: 'Селект', value: TypeFields.select },
   ];
 
   @Output() deleteEvent = new EventEmitter();

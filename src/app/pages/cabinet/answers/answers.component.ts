@@ -1,4 +1,5 @@
 import {Component} from "@angular/core";
+import {AnswersService} from "../services/answers.service";
 
 
 @Component({
@@ -8,6 +9,10 @@ import {Component} from "@angular/core";
 export  class AnswersComponent {
 
   public searchValue: string ='';
+
+  constructor(public answersService: AnswersService) {
+
+  }
 
 
 

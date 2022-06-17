@@ -14,6 +14,8 @@ import {AnswersComponent} from "./answers.component";
 import {NzInputModule} from "ng-zorro-antd/input";
 import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
 import {AnswersRoutingModule} from "./answers-routing.module";
+import {NzTableModule} from "ng-zorro-antd/table";
+import {AnswersService} from "../services/answers.service";
 
 @NgModule({
   imports: [
@@ -28,11 +30,15 @@ import {AnswersRoutingModule} from "./answers-routing.module";
     FormsCreateModule,
     NzInputModule,
     NzDatePickerModule,
-    AnswersRoutingModule
+    AnswersRoutingModule,
+    NzTableModule
   ],
   declarations: [
     AnswersComponent
   ],
-  exports: [AnswersComponent]
+  exports: [AnswersComponent],
+  providers: [
+    AnswersService
+  ]
 })
 export class AnswersModule { }

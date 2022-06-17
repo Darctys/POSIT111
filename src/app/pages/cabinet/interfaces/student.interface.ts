@@ -1,5 +1,5 @@
 export interface IStudentInterface {
-  userId: string;
+  id?: string;
   fullName: string;
   isContract: boolean;
   academicGroup: string;
@@ -9,4 +9,6 @@ export interface IStudentInterface {
   email: string;
   phone: string;
   institute: string;
+  login: string;
+  password: string;
 }

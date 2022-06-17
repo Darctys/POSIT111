@@ -1,7 +1,7 @@
 import {NzUploadFile} from "ng-zorro-antd/upload";
 
 export interface IFaceInterface {
-  faceId: string;
+  id?: string;
   fullName: string;
   birthday: Date;
   institute: string;

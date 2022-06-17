@@ -5,6 +5,8 @@ import {FacesService} from "../../services/faces.service";
 import {IFaceInterface} from "../../interfaces/face.interface";
 import {NzUploadChangeParam, NzUploadFile} from "ng-zorro-antd/upload";
 import {NzMessageService} from "ng-zorro-antd/message";
+import {switchMap, tap} from "rxjs";
+import {RequestService} from "../../services/request.service";
 
 
 @Component({
@@ -15,22 +17,26 @@ import {NzMessageService} from "ng-zorro-antd/message";
 export class FacesPosAddComponent implements OnInit{
 
   public validateForm!: FormGroup;
-  public image: NzUploadFile[] = [];
+  public image: string = '';
+  public fileList: NzUploadFile[] = [];
 
   public fd = new FormData();
 
-  public startUpload = (file: NzUploadFile): boolean => {
-    this.image = this.image.concat(file);
-    const fd = new FormData();
-    fd.append('image', this.image[0].originFileObj as Blob)
-    console.log(fd)
+  public beforeUpload = (file: NzUploadFile): boolean => {
+    console.log(file)
+    this.fileList = [file]
+    const reader = new FileReader();
+    // @ts-ignore
+    reader.onload = (e) => this.image = e.target.result;
+    reader.readAsDataURL(file as unknown as Blob);
     return false;
-  }
+  };
 
   constructor(
     private _modal: NzModalRef,
     private _fb: FormBuilder,
-    private _facesService: FacesService
+    private _facesService: FacesService,
+    private _requestService: RequestService
   ) {}
 
 
@@ -40,7 +46,7 @@ export class FacesPosAddComponent implements OnInit{
       fullName: [null, [Validators.required]],
       institute: [null, [Validators.required]],
       birthday: [null, [Validators.required]],
-      photo: [null, [Validators.required]],
+      photo: [null],
       description: [null, [Validators.required]],
       vkLink: [null, [Validators.required]],
       tgLink: [null, [Validators.required]],
@@ -50,9 +56,16 @@ export class FacesPosAddComponent implements OnInit{
   }
 
   public OnFileSelected(event: any) {
-    console.log(<File>event.target.files[0])
+    let image = event.target.files[0];
+    const file: File = event.target.files[0].arrayBuffer().then((g: any) => {
+      console.log(g)
+      }
+    )
+    const reader = new FileReader();
+    // @ts-ignore
+    reader.onload = (e) => this.image = e.target.result;
+    reader.readAsDataURL(event.target.files[0]);
     this.fd.append('image',event.target.files[0], event.target.files[0].name)
-    console.log(this.fd)
   }
 
   public confirm(): void {
@@ -68,6 +81,16 @@ export class FacesPosAddComponent implements OnInit{
     }
     this._facesService.addFace(this.toModel())
     this._modal.destroy();
+    // this._requestService.saveFaceById(this.toModel()).pipe(
+    //   switchMap((value: any) => {
+    //     this._facesService.addFace(value)
+    //     return this._requestService.getAllFaces()
+    //   }),
+    //   tap(() =>
+    //     this._modal.destroy()
+    //   )
+    // ).subscribe()
+
   }
   public cancel(): void {
     this._modal.destroy();
@@ -78,13 +101,12 @@ export class FacesPosAddComponent implements OnInit{
       fullName: this.validateForm.value.fullName,
       institute: this.validateForm.value.institute,
       birthday: this.validateForm.value.birthday,
-      photo: this.image[0].url!,
+      photo: this.image,
       description: this.validateForm.value.description,
       vkLink: this.validateForm.value.vkLink,
       tgLink: this.validateForm.value.tgLink,
       phone: this.validateForm.value.phone,
       email: this.validateForm.value.email,
-      faceId: (this._facesService.faceList.length + 1).toString(),
     }
   }
 }

@@ -13,6 +13,7 @@ import {StudentEditModule} from "./edit-student/edit-student.module";
 import {NzDescriptionsModule} from "ng-zorro-antd/descriptions";
 import {NzIconModule} from "ng-zorro-antd/icon";
 import {SearchPipe} from "./pipes/search.pipe";
+import {RequestService} from "../services/request.service";
 
 
 @NgModule({
@@ -32,6 +33,9 @@ import {SearchPipe} from "./pipes/search.pipe";
     SearchPipe,
   ],
   exports: [StudentsListComponent],
-  providers:[StudentsService]
+  providers:[
+    StudentsService,
+    RequestService
+  ]
 })
 export class StudentsListModule { }

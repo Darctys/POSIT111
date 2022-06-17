@@ -28,18 +28,13 @@
     <nz-form-item>
       <nz-form-label nzRequired nzFor="photo">Фото</nz-form-label>
       <nz-form-control nzErrorTip="Прикрепите фотографию">
-        <input type="file" (change)="OnFileSelected($event)">
-        <nz-upload
-
-          [(nzFileList)]="image"
-          [nzBeforeUpload]="startUpload"
-
-        >
+        <nz-upload [(nzFileList)]="fileList" [nzBeforeUpload]="beforeUpload" >
           <button nz-button>
             <i nz-icon nzType="upload"></i>
-            Загрузить файл
+            Выберите фотографию
           </button>
         </nz-upload>
+<!--        <input type="file" (change)="OnFileSelected($event)" formControlName="photo">-->
       </nz-form-control>
     </nz-form-item>
 

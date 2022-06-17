@@ -3,6 +3,8 @@ import {NzModalRef, NzModalService} from "ng-zorro-antd/modal";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {StudentsService} from "../../services/students.service";
 import {IStudentInterface} from "../../interfaces/student.interface";
+import {RequestService} from "../../services/request.service";
+import {switchMap, tap} from "rxjs";
 
 
 @Component({
@@ -13,12 +15,14 @@ import {IStudentInterface} from "../../interfaces/student.interface";
 export class StudentEditComponent implements OnInit{
 
   public validateForm!: FormGroup;
+  public id!: string
   public student!: IStudentInterface
 
   constructor(
     private _modal: NzModalRef,
     private _fb: FormBuilder,
     private _studentsService: StudentsService,
+    private _requestService: RequestService,
   ) {
 
   }
@@ -50,8 +54,12 @@ export class StudentEditComponent implements OnInit{
 
       return
     }
-    this._studentsService.editStudent(this.toModel())
-    this._modal.destroy();
+    this._requestService.saveStudentById(this.toModel()).pipe(
+      tap(() => {
+        this._studentsService.editStudent(this.toModel())
+        this._modal.destroy();
+      })
+    ).subscribe()
   }
   public cancel(): void {
     this._modal.destroy();
@@ -70,7 +78,9 @@ export class StudentEditComponent implements OnInit{
       phone: this.validateForm.value.phone,
       posIdCard: this.validateForm.value.posIdCard,
       studentIdCard: this.validateForm.value.studentIdCard,
-      userId: this.student.userId,
+      id: this.student.id,
+      password: this.validateForm.value.password,
+      login: this.validateForm.value.login
     }
   }
 }

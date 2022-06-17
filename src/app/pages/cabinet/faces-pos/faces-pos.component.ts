@@ -6,6 +6,9 @@ import {FacesService} from "../services/faces.service";
 import {IFaceInterface} from "../interfaces/face.interface";
 import {NzTableFilterFn, NzTableFilterList, NzTableSortFn, NzTableSortOrder} from "ng-zorro-antd/table";
 import {InstituteEnum} from "../enums/institute.enum";
+import {RequestService} from "../services/request.service";
+import {switchMap, tap} from "rxjs";
+import {FacesPosEditComponent} from "./faces-pos-edit/faces-pos-edit.component";
 
 interface ColumnItem {
   name: string;
@@ -33,7 +36,7 @@ export class FacesPosComponent implements OnInit {
       sortFn: (a: IFaceInterface, b: IFaceInterface) => a.fullName.localeCompare(b.fullName),
       sortDirections: ['ascend', 'descend', null],
       filterMultiple: true,
-      listOfFilter: this.facesService.instituteFilterList,
+      listOfFilter: this.facesService.filterList,
       filterFn: (list: string[], item: IFaceInterface) => list.some(fullName => item.fullName.indexOf(fullName) !== -1),
     },
     {
@@ -43,7 +46,7 @@ export class FacesPosComponent implements OnInit {
       sortDirections: ['ascend', 'descend', null],
       filterFn: (list: string[], item: IFaceInterface) => list.some(institute => item.institute.indexOf(institute) !== -1),
       filterMultiple: true,
-      listOfFilter: this.facesService.instituteFilterList,
+      listOfFilter: this.facesService.filterList,
     }
   ];
 
@@ -51,8 +54,11 @@ export class FacesPosComponent implements OnInit {
     private _router: Router,
     private _modal: NzModalService,
     public facesService: FacesService,
+    private _requestService: RequestService
   ) {
-    console.log(this.facesService.faceList)
+    this._requestService.getAllFaces().subscribe(
+      (data: any) => this.facesService.faceList = data
+    )
   }
 
   ngOnInit() {
@@ -64,7 +70,12 @@ export class FacesPosComponent implements OnInit {
   }
 
   public deleteStudent(id: string): void {
-    this.facesService.deleteFace(id);
+    this._requestService.deleteFaceById(id).pipe(
+      tap(() => this.facesService.deleteFace(id)),
+      switchMap((data) => {
+        return this._requestService.getAllFaces()
+      })
+    ).subscribe()
   }
 
   public createAddFaceModal(): void {
@@ -76,5 +87,16 @@ export class FacesPosComponent implements OnInit {
 
   public search(): void {
     this.facesService.faceList.filter((item: IFaceInterface) => item.fullName.indexOf(this.searchValue) !== -1);
+  }
+
+  public createEditFaceModal(id: string): void {
+    const face = this.facesService.getFace(id)
+    const modal: NzModalRef = this._modal.create({
+      nzTitle: 'Изменить данные лица POS',
+      nzContent: FacesPosEditComponent,
+      nzComponentParams: {
+        face: face,
+      },
+    });
   }
 }

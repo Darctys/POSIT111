@@ -7,6 +7,7 @@ import {NzButtonModule} from "ng-zorro-antd/button";
 import {NzFormModule} from "ng-zorro-antd/form";
 import {NzModalModule} from "ng-zorro-antd/modal";
 import {NzSelectModule} from "ng-zorro-antd/select";
+import {RequestService} from "../../services/request.service";
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import {NzSelectModule} from "ng-zorro-antd/select";
         NzSelectModule,
     ],
   declarations: [StudentAddComponent],
-  exports: [StudentAddComponent]
+  exports: [StudentAddComponent],
+  providers: [RequestService]
 })
 export class StudentAddModule { }

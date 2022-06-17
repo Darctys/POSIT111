@@ -17,7 +17,7 @@ export class SearchPipe implements PipeTransform {
       return item.fullName.toString().toLowerCase().indexOf(searchTxt.toLowerCase()) > -1
         || item.institute.toString().toLowerCase().indexOf(searchTxt.toLowerCase()) > -1
         || item.academicGroup.toString().toLowerCase().indexOf(searchTxt.toLowerCase()) > -1
-        || item.posIdCard.toString().toLowerCase().indexOf(searchTxt.toLowerCase()) > -1
+        || item.studentIdCard.toString().toLowerCase().indexOf(searchTxt.toLowerCase()) > -1
     });
   }
 

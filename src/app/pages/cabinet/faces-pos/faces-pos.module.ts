@@ -11,6 +11,8 @@ import {FacesPosAddModule} from "./faces-pos-add/faces-pos-add.module";
 import {FacesService} from "../services/faces.service";
 import {NzIconModule} from "ng-zorro-antd/icon";
 import {SearchPipe} from "./pipes/search.pipe";
+import {NzImageModule} from "ng-zorro-antd/experimental/image";
+
 
 @NgModule({
   imports: [
@@ -23,6 +25,8 @@ import {SearchPipe} from "./pipes/search.pipe";
     NzModalModule,
     FacesPosAddModule,
     NzIconModule,
+    NzImageModule,
+
   ],
   declarations: [
     FacesPosComponent,

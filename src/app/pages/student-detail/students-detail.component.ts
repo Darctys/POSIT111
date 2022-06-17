@@ -7,6 +7,7 @@ import {StudentAddComponent} from "../cabinet/students-list/student-add/student-
 import {StudentEditComponent} from "../cabinet/students-list/edit-student/edit-student.component";
 import {FormBuilder} from "@angular/forms";
 import {InstituteEnum} from "../cabinet/enums/institute.enum";
+import {RequestService} from "../cabinet/services/request.service";
 
 @Component({
   selector: 'app-welcome',
@@ -23,13 +24,17 @@ export class StudentsDetailComponent implements OnInit {
     private _route: ActivatedRoute,
     private _modal:NzModalService,
     private _fb: FormBuilder,
+    private _requestService: RequestService
   ) {
 
   }
 
   public ngOnInit() {
     const id: string = this._route.snapshot.queryParams['id']
-    this.student = this._studentsService.getStudent(id);
+
+    this._requestService.getStudentById(id).subscribe((student) => {
+        this.student = student as IStudentInterface
+    })
   }
 
   public createEditStudentModal(): void {

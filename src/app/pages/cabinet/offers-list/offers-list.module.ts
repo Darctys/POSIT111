@@ -16,6 +16,7 @@ import {NzCardModule} from "ng-zorro-antd/card";
 import {NzListModule} from "ng-zorro-antd/list";
 import {NzSpaceModule} from "ng-zorro-antd/space";
 import {NzLayoutModule} from "ng-zorro-antd/layout";
+import {RequestService} from "../services/request.service";
 
 
 @NgModule({
@@ -42,6 +43,9 @@ import {NzLayoutModule} from "ng-zorro-antd/layout";
     exports: [
       OffersListComponent,
       SearchPipe],
-  providers: [OffersService]
+  providers: [
+    OffersService,
+    RequestService
+  ]
 })
 export class OffersListModule { }

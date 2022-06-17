@@ -6,6 +6,8 @@ import {OffersService} from "../services/offers.service";
 import {IOfferInterface} from "../interfaces/offer.interface";
 import {OffersEditComponent} from "./offers-edit/offers-edit.component";
 import {StudentEditComponent} from "../students-list/edit-student/edit-student.component";
+import {RequestService} from "../services/request.service";
+import {switchMap, tap} from "rxjs";
 
 @Component({
   selector: 'offers',
@@ -20,12 +22,20 @@ export class OffersListComponent implements OnInit {
     private _router: Router,
     private _modal: NzModalService,
     public offersService: OffersService,
+    public _requestService: RequestService
   ) {
-    console.log(this.offersService.offerList)
+    this._requestService.getAllOffers().subscribe(
+      (data: any) => this.offersService.offerList = data
+    )
   }
 
   public deleteOffer(id: string): void {
-    this.offersService.deleteOffer(id);
+    this._requestService.deleteOfferById(id).pipe(
+      tap(() => this.offersService.deleteOffer(id)),
+      switchMap((data) => {
+        return this._requestService.getAllOffers()
+      })
+    ).subscribe()
   }
 
   public editOffer(id: string): void {

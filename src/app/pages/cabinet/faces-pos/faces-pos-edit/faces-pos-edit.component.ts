@@ -80,7 +80,7 @@ export class FacesPosEditComponent implements OnInit{
       tgLink: this.validateForm.value.tgLink,
       phone: this.validateForm.value.phone,
       email: this.validateForm.value.email,
-      faceId: this.face.faceId
+      id: this.face.id
     }
   }
 }
