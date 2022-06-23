@@ -9,6 +9,8 @@ import {NzSelectModule} from "ng-zorro-antd/select";
 import {FacesService} from "../../services/faces.service";
 import {NzUploadModule} from "ng-zorro-antd/upload";
 import {NzIconModule} from "ng-zorro-antd/icon";
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { RequestService } from '../../services/request.service';
 
 
 @NgModule({
@@ -21,6 +23,7 @@ import {NzIconModule} from "ng-zorro-antd/icon";
     NzSelectModule,
     NzUploadModule,
     NzIconModule,
+    NzDatePickerModule
   ],
   declarations: [
     FacesPosEditComponent
@@ -29,7 +32,8 @@ import {NzIconModule} from "ng-zorro-antd/icon";
     FacesPosEditComponent
   ],
   providers: [
-    FacesService
+    FacesService,
+    RequestService
   ]
 })
 export class FacesPosEditModule { }

@@ -4,6 +4,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {FacesService} from "../../services/faces.service";
 import {IFaceInterface} from "../../interfaces/face.interface";
 import {NzUploadChangeParam, NzUploadFile} from "ng-zorro-antd/upload";
+import { RequestService } from '../../services/request.service';
+import { tap } from 'rxjs';
 
 
 @Component({
@@ -21,6 +23,7 @@ export class FacesPosEditComponent implements OnInit{
     private _modal: NzModalRef,
     private _fb: FormBuilder,
     private _facesService: FacesService,
+    private _requestService: RequestService
   ) {}
 
   handleChange(info: NzUploadChangeParam): void {
@@ -38,10 +41,14 @@ export class FacesPosEditComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    const blob = new Blob([this.face.photo],{type:'image'});
+    const file = blob as unknown as NzUploadFile;
+    file.name = 'Прикреплённое изображение'
+    this.fileList = [file]
     this.validateForm = this._fb.group({
       fullName: [this.face.fullName, [Validators.required]],
       institute: [this.face.institute, [Validators.required]],
-      birthday: [this.face.birthday, [Validators.required]],
+      birthday: [this.face.birthday.toString(), [Validators.required]],
       photo: [this.face.photo, [Validators.required]],
       description: [this.face.description, [Validators.required]],
       vkLink: [this.face.vkLink, [Validators.required]],
@@ -62,6 +69,12 @@ export class FacesPosEditComponent implements OnInit{
 
       return
     }
+    this._requestService.saveFaceById(this.toModel()).pipe(
+      tap(() => {
+        this._facesService.editFace(this.toModel())
+        this._modal.destroy();
+      })
+    ).subscribe()
     this._facesService.editFace(this.toModel())
     this._modal.destroy();
   }

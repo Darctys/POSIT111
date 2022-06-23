@@ -38,8 +38,8 @@ export class StudentEditComponent implements OnInit{
       hasElectronicSignature: [String(this.student.hasElectronicSignature), [Validators.required]],
       phone: [this.student.phone, [Validators.required]],
       email: [this.student.email, [Validators.required]],
-      login: [null, [Validators.required]],
-      password: [null, [Validators.required]],
+      login: [this.student.login, [Validators.required]],
+      password: [this.student.password, [Validators.required]],
     });
   }
 

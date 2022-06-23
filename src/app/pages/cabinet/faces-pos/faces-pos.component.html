@@ -24,7 +24,7 @@
   <tr *ngFor="let data of basicTable.data">
     <ng-container [ngSwitch]="data.institute">
       <td>
-        <nz-image [nzSrc]="data.photo" [nzHeight]="128" [nzWidth]="128">
+        <nz-image [nzSrc]="mapPhoto(data.photo)" [nzHeight]="128" [nzWidth]="128">
 
         </nz-image>
 

@@ -1,5 +1,9 @@
-<input [(ngModel)]="form.name" nz-input placeholder="Название формы" nzSize="large" />
-<textarea [(ngModel)]="form.description" nz-input placeholder="Описание формы" nzAutosize></textarea>
+<div class="with-padding-vertical">
+  <input [(ngModel)]="form.name" nz-input placeholder="Название формы" nzSize="large" />
+</div>
+<div class="with-padding-vertical">
+  <textarea [(ngModel)]="form.description" nz-input placeholder="Описание формы" nzAutosize></textarea>
+</div>
 <div>
   <nz-date-picker
     [nzPlaceHolder]="'Время появления'"
@@ -14,8 +18,15 @@
     [(ngModel)]="end"
   ></nz-date-picker>
 </div>
-<div *ngFor="let field of form.fields">
+<div class="with-padding-vertical" *ngFor="let field of form.fields">
   <form-item [model]="field" (deleteEvent)="deleteField($event)" ></form-item>
 </div>
-<button nz-button [nzType]="'primary'" (click)="addField()"><span>Добавить поле</span></button>
-<button nz-button [nzType]="'primary'" (click)="saveForm()"><span>Сохранить форму</span></button>
+<div class="with-padding-vertical" nz-row [nzGutter]="8">
+  <div nz-col class="gutter-row" >
+    <button nz-button [nzType]="'primary'" (click)="addField()"><span>Добавить поле</span></button>
+  </div>
+  <div nz-col class="gutter-row" >
+    <button nz-button [nzType]="'primary'" (click)="saveForm()"><span>Сохранить форму</span></button>
+  </div>
+</div>
+

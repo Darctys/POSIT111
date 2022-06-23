@@ -69,6 +69,10 @@ export class FacesPosComponent implements OnInit {
     this._router.navigateByUrl(`cabinet/faces-pos/?id=${id}`).then()
   }
 
+  public mapPhoto(photo: string): string {
+    return "data:image/png;base64,".concat(photo)
+  }
+
   public deleteStudent(id: string): void {
     this._requestService.deleteFaceById(id).pipe(
       tap(() => this.facesService.deleteFace(id)),

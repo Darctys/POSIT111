@@ -19,9 +19,14 @@
     </nz-form-item>
 
     <nz-form-item>
-      <nz-form-label nzRequired nzFor="data">День рождения</nz-form-label>
+      <nz-form-label nzRequired nzFor="birthday">День рождения</nz-form-label>
       <nz-form-control nzErrorTip="Введите дату рождения">
-        <input nz-input type="date" formControlName="birthday">
+        <nz-date-picker
+        [nzPlaceHolder]="'Время появления'"
+        nzShowTime
+        nzFormat="yyyy-MM-dd"
+        formControlName="birthday"
+      ></nz-date-picker>
       </nz-form-control>
     </nz-form-item>
 
@@ -31,7 +36,6 @@
         <nz-upload
           [nzFileList]="fileList"
           (nzChange)="handleChange($event)"
-          formControlName="photo"
         >
           <button nz-button>
             <i nz-icon nzType="upload"></i>
@@ -80,5 +84,5 @@
 
 <div *nzModalFooter>
   <button nz-button nzType="default" (click)="cancel()">Отменить</button>
-  <button nz-button nzType="primary" (click)="confirm()">Добавить</button>
+  <button nz-button nzType="primary" (click)="confirm()">Изменить</button>
 </div>

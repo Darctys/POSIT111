@@ -79,17 +79,17 @@ export class FacesPosAddComponent implements OnInit{
 
       return
     }
-    this._facesService.addFace(this.toModel())
+    // this._facesService.addFace(this.toModel())
     this._modal.destroy();
-    // this._requestService.saveFaceById(this.toModel()).pipe(
-    //   switchMap((value: any) => {
-    //     this._facesService.addFace(value)
-    //     return this._requestService.getAllFaces()
-    //   }),
-    //   tap(() =>
-    //     this._modal.destroy()
-    //   )
-    // ).subscribe()
+    this._requestService.saveFaceById(this.toModel()).pipe(
+      switchMap((value: any) => {
+        this._facesService.addFace(value)
+        return this._requestService.getAllFaces()
+      }),
+      tap(() =>
+        this._modal.destroy()
+      )
+    ).subscribe()
 
   }
   public cancel(): void {
@@ -101,7 +101,7 @@ export class FacesPosAddComponent implements OnInit{
       fullName: this.validateForm.value.fullName,
       institute: this.validateForm.value.institute,
       birthday: this.validateForm.value.birthday,
-      photo: this.image,
+      photo: this.image.split('base64,')[1],
       description: this.validateForm.value.description,
       vkLink: this.validateForm.value.vkLink,
       tgLink: this.validateForm.value.tgLink,
